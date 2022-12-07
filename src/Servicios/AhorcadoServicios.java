@@ -94,7 +94,9 @@ public class AhorcadoServicios {
 
         for (int i = 0; i < vectorPalabraOculta.length; i++) {
 
-            if (vectorPalabraOculta[i].equalsIgnoreCase(a1.getLetraIngresada())) {
+            if (vectorLetrasEncontradas[i].equalsIgnoreCase(" " + a1.getLetraIngresada() + " ")) {
+                System.out.println("La letra ya había sido ingresada");
+            } else if (vectorPalabraOculta[i].equalsIgnoreCase(a1.getLetraIngresada())) {
                 vectorLetrasEncontradas[i] = " " + a1.getLetraIngresada() + " ";
                 cantLetrasEncontradas += 1;
                 encontradas = true;
