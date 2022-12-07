@@ -2,9 +2,6 @@ package Servicios;
 
 import Entidades.Ahorcado;
 
-import java.awt.*;
-import java.awt.font.TextAttribute;
-import java.util.Map;
 import java.util.Scanner;
 
 public class AhorcadoServicios {
@@ -82,6 +79,7 @@ public class AhorcadoServicios {
             System.out.println("La letra ingresada es parte de la palabra oculta");
         } else {
             System.out.println("La letra ingresada no es parte de la palabra oculta");
+            a1.setCantidadIntentosMax(a1.getCantidadIntentosMax() - 1);
         }
 
     }
@@ -101,6 +99,7 @@ public class AhorcadoServicios {
                 cantLetrasEncontradas += 1;
                 encontradas = true;
             }
+
             System.out.print(vectorLetrasEncontradas[i]);
         }
         System.out.println();
@@ -111,9 +110,6 @@ public class AhorcadoServicios {
         System.out.println("La cantidad de letras encontradas es " + cantLetrasEncontradas);
 
         System.out.println("La cantidad de letras que faltan por ser encontradas es " + cantLetrasRestantes);
-
-        a1.setCantidadIntentosMax(a1.getCantidadIntentosMax() - 1);
-        System.out.println("La cantidad de intentos que te quedan es " + a1.getCantidadIntentosMax());
 
         return encontradas;
 
@@ -137,7 +133,7 @@ public class AhorcadoServicios {
             encontradas();
             intentos();
 
-        } while (a1.getCantidadIntentosMax() != 0);
+        } while (a1.getCantidadIntentosMax() != 0 && cantLetrasEncontradas != a1.getTamPalabraOculta());
 
         if (cantLetrasEncontradas == a1.getTamPalabraOculta()) {
             System.out.println("Felicitaciones, has encontrado la palabra oculta :D");
