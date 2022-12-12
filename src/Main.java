@@ -1,4 +1,3 @@
-import Entidades.Ahorcado;
 import Servicios.AhorcadoServicios;
 
 public class Main {
