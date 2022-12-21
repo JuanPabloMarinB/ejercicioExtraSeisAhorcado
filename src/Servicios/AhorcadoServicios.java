@@ -2,7 +2,7 @@ package Servicios;
 
 import Entidades.Ahorcado;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class AhorcadoServicios {
 
@@ -11,38 +11,56 @@ public class AhorcadoServicios {
     String[] vectorPalabraOculta;
     String[] vectorLetrasEncontradas;
     String palabraOcultaString;
+    String pistaPalabraOculta;
     String letrasEquivocadas = " ";
     String palabrasEquivocadas = " ";
     int cantLetrasEncontradas = 0;
-
-    String[] palabrasNivelFacil = {"solo", "via", "amor", "paz", "luna", "luz", "sol", "mes", "lana", "loco", "java", "fuga", "fosil", "ajeno", "angel", "atras", "sucio", "heroe", "unico", "joven", "linea", "niñez", "obvio", "paris"};
+    String[] palabrasNivelFacil = {"Solo", "Sin Compañía", "Via", "Sinónimo De Camino", "Amor", "Sentimiento", "Paz", "Paloma Blanca", "Luna", "La Pareja Del Sol", "Luz", "Ilumina", "Sol", "La Pareja De La Luna", "Mes", "Son Doce En El Año", "Lana", "Material De La Oveja", "Loco", "Le Falta Un Tornillo", "Java", "Lenguaje De Programación", "Fuga", "Sinónimo De Escapar", "Fosil", "Lo Dejaron Los Dinos", "Ajeno", "Lo Que No Es Tuyo", "Angel", "Humano Con Alas", "Atras", "Antónimo De Adelante", "Sucio", "Lugar poco limpio", "Heroe", "Salva A Las Personas", "Unico", "Solo Hay Uno", "Joven", "Dejó De Ser Infantil", "Linea", "Es Recta", "Niñez", "Primera Etapa Del Ser", "Obvio", "Demasiado Lógico", "Paris", "Venden Croissants"};
     String[] palabrasNivelMedio = {"soldado", "pintura", "ciclo", "mundo", "verdad", "dinero", "salud", "recibir", "galaxia", "refugio", "general", "sesenta", "girasol", "genesis", "sonrisa", "honrado", "beatriz", "hoguera", "bolivia", "todavia", "uruguay", "campeon", "invento", "interes", "vencido", "leyenda", "lechuza", "mezclar", "cultivo", "deducir", "obtener", "oracion", "empezar", "enrique", "piscina", "excepto", "ficcion"};
     String[] palabrasNivelDificil = {"celular", "bateria", "bacteria", "enfermedad", "felicidad", "creatividad", "compromiso", "absoluto", "absolver", "absorber", "fundacion", "advertir", "reconocer", "guitarra", "relojeria", "resolver", "realizar", "semaforo", "almohada", "analisis", "gimnasia", "siguiente", "simpatico", "antigüedad", "sustantivo", "holandes", "secuencia", "biblioteca", "servicio", "bienvenido", "subrayar", "suficiente", "hemisferio", "hermosura", "horizonte", "imaginar", "valdivia", "cantimplora", "indigena", "vacaciones", "carretilla", "invasion", "velocidad", "ventajoso", "ciencias", "invitacion", "valiente", "cincuenta", "civilizar", "importancia", "ventanal", "venezuela", "colectivo", "colombia", "violencia", "combinar", "zanahoria", "comprension", "confianza", "longitud", "conquista", "mediodia", "constanza", "matematica", "construir", "conversacion", "necesario", "convertir", "cumpleaños", "obediente", "obsequio", "observar", "demasiado", "despacio", "perseguir", "enrollar", "estomago", "patricio", "excelente", "exquisito", "precioso", "extranjero", "principal", "ferrocarril", "prohibir"};
 
     public Ahorcado crearJuego() {
-        System.out.println("Elige la dificulad ");
-        System.out.println("1. Facil");
-        System.out.println("2. Intermedio");
-        System.out.println("3. Difícil");
-        int dificultad = sc.nextInt();
 
-        while (dificultad < 1 || dificultad > 3) {
-            System.out.println("Ingresa un número válido");
+        int dificultad;
+
+        do {
+            System.out.println("Elige la dificulad");
             System.out.println("1. Facil");
             System.out.println("2. Intermedio");
             System.out.println("3. Difícil");
             dificultad = sc.nextInt();
-        }
+        } while (dificultad < 1 || dificultad > 3);
 
         switch (dificultad) {
             case 1:
-                palabraOcultaString = palabrasNivelFacil[(int) (Math.random() * palabrasNivelFacil.length)].toUpperCase();
+                int posicionPalabraOcultaFacil = (int) (Math.random() * palabrasNivelFacil.length);
+                if (posicionPalabraOcultaFacil == 0 || posicionPalabraOcultaFacil % 2 == 0) {
+                    pistaPalabraOculta = palabrasNivelFacil[(posicionPalabraOcultaFacil + 1)];
+                } else {
+                    pistaPalabraOculta = palabrasNivelFacil[posicionPalabraOcultaFacil];
+                    posicionPalabraOcultaFacil -= 1;
+                }
+                palabraOcultaString = palabrasNivelFacil[posicionPalabraOcultaFacil];
                 break;
             case 2:
-                palabraOcultaString = palabrasNivelMedio[(int) (Math.random() * palabrasNivelMedio.length)];
+                int posicionPalabraOcultaIntermedio = (int) (Math.random() * palabrasNivelMedio.length);
+                if (posicionPalabraOcultaIntermedio == 0 || posicionPalabraOcultaIntermedio % 2 == 0) {
+                    pistaPalabraOculta = palabrasNivelMedio[(posicionPalabraOcultaIntermedio + 1)];
+                } else {
+                    pistaPalabraOculta = palabrasNivelMedio[posicionPalabraOcultaIntermedio];
+                    posicionPalabraOcultaIntermedio -= 1;
+                }
+                palabraOcultaString = palabrasNivelMedio[posicionPalabraOcultaIntermedio];
                 break;
             case 3:
-                palabraOcultaString = palabrasNivelDificil[(int) (Math.random() * palabrasNivelDificil.length)];
+                int posicionPalabraOcultaDificil = (int) (Math.random() * palabrasNivelDificil.length);
+                if (posicionPalabraOcultaDificil == 0 || posicionPalabraOcultaDificil % 2 == 0) {
+                    pistaPalabraOculta = palabrasNivelDificil[(posicionPalabraOcultaDificil + 1)];
+                } else {
+                    pistaPalabraOculta = palabrasNivelDificil[posicionPalabraOcultaDificil];
+                    posicionPalabraOcultaDificil -= 1;
+                }
+                palabraOcultaString = palabrasNivelDificil[posicionPalabraOcultaDificil];
                 break;
             default:
         }
@@ -63,6 +81,8 @@ public class AhorcadoServicios {
         System.out.println("Palabra Oculta");
 
         vectorLetrasEncontradas = new String[a1.getTamPalabraOculta()];
+
+        longitud();
 
         for (int i = 0; i < vectorPalabraOculta.length; i++) {
             vectorLetrasEncontradas[i] = " _ ";
@@ -94,6 +114,9 @@ public class AhorcadoServicios {
 
         System.out.println("Ingresa la letra que crees que pertenece a la palabra oculta");
         System.out.println("Si crees saber la palabra, puedes escribirla");
+        if (a1.getCantidadIntentosMax() == 1) {
+            System.out.println("LA PISTA DE LA PALABRA ES '" + pistaPalabraOculta.toUpperCase() + "'");
+        }
         a1.setLetraIngresada(sc.next().toUpperCase());
         if (a1.getLetraIngresada().length() > 2) {
 
@@ -107,10 +130,9 @@ public class AhorcadoServicios {
                 palabrasEquivocadas = palabrasEquivocadas.concat(a1.getLetraIngresada() + " ");
             }
         } else {
-
-            while (a1.getLetraIngresada().length() > 1) {
+            while (a1.getLetraIngresada().length() == 2) {
                 System.out.println("Dato incorrecto, solo debes ingresar una letra o una palabra con mínimo 3 letras. Inténtalo de nuevo");
-                a1.setLetraIngresada(sc.next());
+                a1.setLetraIngresada(sc.next().toUpperCase());
             }
 
             for (int i = 0; i < vectorPalabraOculta.length; i++) {
@@ -125,10 +147,7 @@ public class AhorcadoServicios {
                 System.out.println("La letra " + a1.getLetraIngresada() + " ya fue ingresada");
             }
 
-            if (letraEncontrada) {
-                System.out.println("La letra ingresada es parte de la palabra oculta");
-            } else if (!letrasEquivocadas.contains(a1.getLetraIngresada()) && !letraEncontrada) {
-                System.out.println("La letra ingresada no es parte de la palabra oculta");
+            if (!letraEncontrada) {
                 a1.setCantidadIntentosMax(a1.getCantidadIntentosMax() - 1);
                 letrasEquivocadas = letrasEquivocadas.concat(a1.getLetraIngresada() + "  ");
             }
@@ -164,13 +183,11 @@ public class AhorcadoServicios {
             System.out.println();
         }
 
-        System.out.println("\nLetras equivocadas");
+        System.out.println("Letras equivocadas");
         System.out.println(letrasEquivocadas);
 
-        System.out.println("\nPalabras equivocadas");
+        System.out.println("Palabras equivocadas");
         System.out.println(palabrasEquivocadas);
-
-        System.out.println();
 
         a1.setLetrasEncontradas(cantLetrasEncontradas);
         int cantLetrasRestantes = a1.getTamPalabraOculta() - a1.getLetrasEncontradas();
@@ -179,10 +196,8 @@ public class AhorcadoServicios {
             System.out.println("Has encontrado toda la palabra :D");
             System.out.println("La cantidad de letras que faltan por ser encontradas es CERO");
         } else {
-            System.out.println("La cantidad de letras encontradas es " + cantLetrasEncontradas);
-            System.out.println("La cantidad de letras que faltan por ser encontradas es " + cantLetrasRestantes);
+            System.out.println("Cantidad de letras (Encontradas,Restantes) (" + cantLetrasEncontradas + "," + cantLetrasRestantes + ")");
         }
-
 
         return encontradas;
 
@@ -191,9 +206,9 @@ public class AhorcadoServicios {
     public void intentos() {
 
         if (esLaPalabra()) {
-            System.out.println("La cantidad de intentos que te quedaban era " + a1.getCantidadIntentosMax());
+            System.out.println("Te sobraron " + a1.getCantidadIntentosMax() + " intentos");
         } else {
-            System.out.println("La cantidad de intentos que te quedan es " + a1.getCantidadIntentosMax());
+            System.out.println("Te quedan " + a1.getCantidadIntentosMax() + " intentos");
         }
     }
 
